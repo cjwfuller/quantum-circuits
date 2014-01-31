@@ -103,6 +103,25 @@ class Register:
         vector[one_position] = 1
         return vector
 
+    @staticmethod
+    def column_vector_to_dirac(column):
+        """Convert vector from to Dirac form to column vector
+
+        Arguments:
+        column -- column vector to convert e.g. [0, 0, 0, 1]
+
+        Example:
+             [0, 0, 0, 1] returns [0, 0] (|00> in Dirac notation)
+        """
+        len_column = len(column)
+        num_qubits = int(math.sqrt(len_column))
+        bases = Register.generate_bases(num_qubits)
+        try:
+            one_position = column.index(1)
+        except:
+            raise Exception("Supplied column vector contained no '1' value")
+        return bases[len_column - one_position - 1]
+
     # TODO
     def measure(self):
         """Perform quantum measurement
