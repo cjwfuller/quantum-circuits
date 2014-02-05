@@ -25,13 +25,13 @@ class Register(object):
         shows a 'collapsed quantum state' because 1 0 is the only state set to 1
         """
         num_bases = len(state)
-        if(num_bases != pow(2, num_qubits)):
+        if num_bases != pow(2, num_qubits):
             raise Exception("Invalid number of bases vectors")
 
         eps = 0.0001
         total = complex(0, 0)
-        for s in state:
-            total = total + pow(np.abs(s), 2)
+        for val in state:
+            total = total + pow(np.abs(val), 2)
         if(not (abs(total - (complex(1, 0))) < eps)):
             raise Exception("Quantum state is invalid")
 
@@ -50,11 +50,10 @@ class Register(object):
         """
         bases = []
         num_vectors = pow(2, num_qubits)
-        base_idx = 0
         for idx in range(num_vectors):
             base = []
             current_base = idx
-            for idy in range(num_qubits):
+            for _ in range(num_qubits):
                 base.append(current_base % 2)
                 current_base = current_base / 2
             base.reverse()
@@ -76,11 +75,11 @@ class Register(object):
               0], [1, 1], [1, 0], [1, 1]]
         """
         bases = Register.generate_bases(num_qubits)
-        for base_num, base in enumerate(bases):
-            bases_before_filter = bases[base_num]
-            bases[base_num] = []
+        for idx in xrange(len(bases)):
+            bases_before_filter = bases[idx]
+            bases[idx] = []
             for qubit_position in qubit_nums:
-                bases[base_num].append(bases_before_filter[qubit_position])
+                bases[idx].append(bases_before_filter[qubit_position])
         return bases
 
     @staticmethod
@@ -94,8 +93,8 @@ class Register(object):
             [0, 0] (|00> in Dirac notation) returns [0, 0, 0, 1]
         """
         binary_str = ''
-        for d in dirac:
-            binary_str = binary_str + str(d)
+        for val in dirac:
+            binary_str = binary_str + str(val)
         column_vector_len = pow(2, len(dirac))
         one_position = column_vector_len - int(binary_str, 2) - 1
         vector = [0] * column_vector_len
