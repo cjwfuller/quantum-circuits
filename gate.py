@@ -6,17 +6,20 @@ class QuantumGate:
         if(not self.is_unitary()):
             raise Exception("Supplied matrix is not unitary")
 
+    # TODO
     def is_unitary(self):
         shape = np.shape(self.matrix)
-        # unitary matrixes should have dimension n * n
+        # unitary matrices will always have dimension n*n
         x = shape[0]
         y = shape[1]
         if(x != y):
             return False
-        # TODO
-        identity = np.identity(x, np.complex_)
-        conjugate_transpose = self.matrix
-        return True
+        # unitary matrices must satisfy U*U = UU* = I
+        identity = self.matrix.getI
+        conjugate_transpose = self.matrix.getH
+        print identity
+        # FIXME
+        return (self.matrix * conjugate_transpose) == identity
 
 if __name__ == '__main__':
-    qg = QuantumGate([[0,1],[1,0]])
+    qg = QuantumGate(np.matrix('0 1; 1 0'))
