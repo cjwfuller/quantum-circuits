@@ -9,8 +9,7 @@ class QuantumGate:
     def __is_unitary(self):
         shape = np.shape(self.matrix)
         # unitary matrices will always have dimension n*n
-        x = shape[0]
-        y = shape[1]
+        x, y = shape[0], shape[1]
         if(x != y):
             return False
         # unitary matrices must satisfy U*U = UU* = I
