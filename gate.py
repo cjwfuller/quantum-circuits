@@ -3,10 +3,10 @@ import numpy as np
 class QuantumGate:
     def __init__(self, matrix):
         self.matrix = matrix
-        if(not self.is_unitary()):
+        if(not self.__is_unitary()):
             raise Exception("Supplied matrix is not unitary")
 
-    def is_unitary(self):
+    def __is_unitary(self):
         shape = np.shape(self.matrix)
         # unitary matrices will always have dimension n*n
         x = shape[0]
