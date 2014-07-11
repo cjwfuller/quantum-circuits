@@ -17,6 +17,3 @@ class QuantumGate:
         conjugate_transpose = self.matrix.getH()
 		# TODO needs studying - this only checks the UU* = I part of equation
         return (self.matrix * conjugate_transpose).all() == identity.all()
-
-if __name__ == '__main__':
-    qg = QuantumGate(np.matrix('0 1; 1 0', np.complex_))
