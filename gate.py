@@ -15,5 +15,4 @@ class QuantumGate:
         # unitary matrices must satisfy U*U = UU* = I
         identity = self.matrix.getI()
         conjugate_transpose = self.matrix.getH()
-        # TODO needs studying - this only checks the UU* = I part of equation
         return (self.matrix * conjugate_transpose).all() == identity.all()
