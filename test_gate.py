@@ -31,7 +31,10 @@ class TestGate(unittest.TestCase):
         )
         qg = gate.QuantumGate(toffoli)
 
-    def test_is_not_unitary(self):
+    def test_hadamard_is_unitary(self):
+        qg = gate.QuantumGate(((1/math.sqrt(2)+0j) * np.matrix('1 1; 1 -1', np.complex_)))
+
+    def test_all_real_is_not_unitary(self):
         matrix = np.matrix('1 1; 1 0', np.complex_)
         self.failUnlessRaises(Exception, gate.QuantumGate, matrix)
 
