@@ -13,6 +13,6 @@ class QuantumGate:
         if(x != y):
             return False
         # unitary matrices must satisfy U*U = UU* = I
-        identity = self.matrix.getI()
+        identity = np.identity(x)
         conjugate_transpose = self.matrix.getH()
         return (self.matrix * conjugate_transpose).all() == identity.all()

@@ -35,5 +35,9 @@ class TestGate(unittest.TestCase):
         matrix = np.matrix('1 1; 1 0', np.complex_)
         self.failUnlessRaises(Exception, gate.QuantumGate, matrix)
 
+    def test_complex_is_not_unitary(self):
+        matrix = np.matrix('1 -1i; 1 -1i', np.complex_)
+        self.failUnlessRaises(Exception, gate.QuantumGate, matrix)
+
 if __name__ == '__main__':
     unittest.main()
