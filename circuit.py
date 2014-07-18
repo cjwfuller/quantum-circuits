@@ -2,7 +2,13 @@ import numpy as np
 
 class Circuit:
     def __init__(self, num_qubits, num_steps):
-        self.circuit = [[]]
-        init_step = [complex(0,0)] * pow(2, num_qubits)
+        size = pow(2, num_qubits)
+        zeros = np.zeros((size, size), dtype=np.complex_)
 
-        # TODO At arbitrary x,y will potentially be a quantum gate
+        self.grid = [
+            [
+                [
+                    zeros for gate in xrange(num_qubits)
+                ] for step in xrange(num_steps)
+            ] for n in xrange(size)
+        ]
