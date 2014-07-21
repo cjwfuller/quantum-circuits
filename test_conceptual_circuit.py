@@ -47,5 +47,18 @@ class TestConceptualCircuit(unittest.TestCase):
         c.add_gate(hadamard, row_num)
         self.assertRaises(IndexError, c.add_gate, hadamard, row_num)
 
+    def test_basic_step_forwards(self):
+        c = cc.ConceptualCircuit(1, 5)
+        g = gate.QuantumGate('hadamard')
+        c.step_forwards()
+        self.assertEquals(c.step, 1)
+
+    def test_step_too_far_constraint(self):
+        c = cc.ConceptualCircuit(1, 2)
+        g = gate.QuantumGate('hadamard')
+        c.step_forwards()
+        c.step_forwards()
+        self.assertRaises(IndexError, c.step_forwards)
+
 if __name__ == '__main__':
     unittest.main()
