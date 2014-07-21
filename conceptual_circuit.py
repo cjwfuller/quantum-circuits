@@ -26,7 +26,7 @@ class ConceptualCircuit:
         step = 0
         while True:
             if step == self.num_steps:
-                raise IndexError("No free steps in requested row")
+                raise IndexError("No free steps to add gate to requested row")
             if self.grid[row_num][step] == '-':
                 self.grid[row_num][step] = gate.symbol
                 break
