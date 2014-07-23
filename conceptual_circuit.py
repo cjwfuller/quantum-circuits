@@ -36,6 +36,9 @@ class ConceptualCircuit:
     def display(self):
         """Convenience method to print the circuit to stdout."""
         for row in self.grid:
+            print row
+        print ""
+        print ['^' if x == self.step else '*' for x in xrange(self.num_steps)]
 
     def step_forwards(self):
         """Step forwards through the circuit.
