@@ -35,3 +35,14 @@ class QuantumCircuit:
         target_qubit --
         selected_qubits -- the qubits that the gate should act on
         """
+
+    # TODO
+    def step_forwards(self):
+        """Apply gates in next step to register"""
+
+   # TODO
+   def measure(self):
+        """Perform quantum measurement
+
+        Collapses from quantum state to classical state
+        """
