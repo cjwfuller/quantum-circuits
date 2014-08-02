@@ -20,6 +20,7 @@ class ConceptualCircuit:
             ] for step in xrange(size)
         ]
 
+    # TODO deal with overlapping gates
     def add_gate(self, gate, row_num):
         """Add a gate to the conceptual circuit.
 
