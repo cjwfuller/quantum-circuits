@@ -1,5 +1,6 @@
 import numpy as np
 
+# TODO having a conceptual circuit and quantum circuit is unnecessary - refactor
 class QuantumCircuit:
     """Quantum Circuit.
 
