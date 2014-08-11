@@ -22,6 +22,12 @@ class TestCircuit(unittest.TestCase):
         hadamard = gate.QuantumGate('hadamard')
         c.add_gate(hadamard, 1)
 
+    def test_step_forwards(self):
+        c = quantum_circuit.QuantumCircuit(1, 5)
+        self.assertEqual(c.step, 0)
+        c.step_forwards()
+        self.assertEqual(c.step, 1)
+
     # TODO
     def test_add_after_last_step_constraint(self):
         self.fail()
