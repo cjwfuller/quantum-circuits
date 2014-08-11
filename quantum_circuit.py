@@ -8,6 +8,8 @@ class QuantumCircuit:
     operations
     """
     def __init__(self, num_qubits, num_steps):
+        self.step = 0
+        self.num_steps = num_steps
         self.num_bases = pow(2, num_qubits)
         zeros = np.zeros((self.num_bases, self.num_bases), dtype=np.complex_)
 
@@ -40,6 +42,12 @@ class QuantumCircuit:
     # TODO
     def step_forwards(self):
         """Apply gates in next step to register"""
+        if self.step == self.num_steps:
+            raise IndexError("No free steps to step forwards")
+        self.step = self.step + 1
+
+        for idx, basis in enumerate(self.grid[self]):
+            print basis
 
    # TODO
    def measure(self):
