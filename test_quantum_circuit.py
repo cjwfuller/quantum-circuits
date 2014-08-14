@@ -1,8 +1,8 @@
 import unittest
-import circuit
+import quantum_circuit
 import gate
 
-class TestCircuit(unittest.TestCase):
+class TestQuantumCircuit(unittest.TestCase):
     def test_basic_construction(self):
         c = circuit.Circuit(1, 5)
 
