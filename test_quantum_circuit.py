@@ -28,6 +28,10 @@ class TestQuantumCircuit(unittest.TestCase):
         c.step_forwards()
         self.assertEqual(c.step, 1)
 
+    def test_display(self):
+        c = quantum_circuit.QuantumCircuit(1, 2)
+        c.display()
+
     # TODO
     def test_add_after_last_step_constraint(self):
         self.fail()
