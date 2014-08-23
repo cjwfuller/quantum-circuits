@@ -10,15 +10,14 @@ class QuantumCircuit:
     def __init__(self, num_qubits, num_steps):
         self.step = 0
         self.num_steps = num_steps
+        self.num_qubits = num_qubits
         self.num_bases = pow(2, num_qubits)
-        zeros = np.zeros((self.num_bases, self.num_bases), dtype=np.complex_)
+        self.zeros = np.zeros((self.num_bases, self.num_bases), dtype=np.complex_)
 
         self.grid = [
             [
-                [
-                    zeros for gate in xrange(num_qubits)
-                ] for step in xrange(num_steps)
-            ] for n in xrange(self.num_bases)
+                self.zeros for gate in xrange(self.num_qubits)
+            ] for n in xrange(self.num_steps)
         ]
 
     # TODO
