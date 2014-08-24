@@ -21,7 +21,7 @@ class TestQuantumCircuit(unittest.TestCase):
         self.assertEqual(len(c.grid), num_steps)
         for step in c.grid:
             for gate in step:
-                self.assertEqual(len(gate), num_basis)
+                self.assertIsNone(gate)
 
     def test_add_gate(self):
         """Adding a quantum gate, works
@@ -87,10 +87,11 @@ class TestQuantumCircuit(unittest.TestCase):
         Adding a Hadamard gate (2-qubits) to a 1-qubit system, fails
         """
         num_qubits = 1
-        num_steps = 2
+        num_steps = 1
 
         c = qc.QuantumCircuit(num_qubits, num_steps)
         hadamard = gate.QuantumGate('hadamard')
+        c.add_gate(hadamard, 1)
 
         self.assertRaises(Exception, c.add_gate, hadamard, 1)
 
