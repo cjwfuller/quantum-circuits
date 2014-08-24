@@ -13,7 +13,7 @@ class QuantumCircuit:
 
         self.grid = [
             [
-                self.zeros for gate in xrange(self.num_qubits)
+                None for gate in xrange(self.num_bases)
             ] for n in xrange(self.num_steps)
         ]
 
