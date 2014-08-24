@@ -3,11 +3,7 @@ from pprint import pprint
 
 # TODO having a conceptual circuit and quantum circuit is unnecessary - refactor
 class QuantumCircuit:
-    """Quantum Circuit.
 
-    Low-level 2D array of complex-valued quantum gates and associated
-    operations
-    """
     def __init__(self, num_qubits, num_steps):
         self.step = 0
         self.num_steps = num_steps
