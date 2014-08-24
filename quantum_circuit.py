@@ -25,15 +25,21 @@ class QuantumCircuit:
         resized so they can be applied to the circuit
         """
 
-    # TODO
-    def add_gate(self, gate, control_qubits, target_qubit):
+    def add_gate(self, gate, qubit_num):
         """Add a gate to the circuit.
 
         Arguments:
         gate -- the quantum gate to add to the circuit
-        target_qubit --
-        selected_qubits -- the qubits that the gate should act on
+        qubit_num -- the first qubit the gate should act on
         """
+        step = 0
+        while True:
+            if step == self.num_steps:
+                raise IndexError("No room for gate")
+            if(self.grid[step][qubit_num] is None):
+                self.grid[step][qubit_num] = gate
+                break
+            step = step + 1
 
     # TODO
     def step_forwards(self):
