@@ -14,7 +14,6 @@ class TestQuantumCircuit(unittest.TestCase):
         The number of steps, number of qubits and gate dimensions should all
         be correct"""
         num_qubits = 1
-        num_basis = 2
         num_steps = 5
 
         c = qc.QuantumCircuit(num_qubits, num_steps)
@@ -63,17 +62,14 @@ class TestQuantumCircuit(unittest.TestCase):
     def test_add_after_last_step_constraint(self):
         """Adding a gate after last position, fails"""
         num_qubits = 1
-        num_steps = 2
+        num_steps = 1
         qubit_num = 0
-        paulix_step = 0
-        pauliy_step = 1
 
         c = qc.QuantumCircuit(num_qubits, num_steps)
         paulix = gate.QuantumGate('paulix')
-        pauliy = gate.QuantumGate('pauliy')
         c.add_gate(paulix, qubit_num)
 
-        self.assertRaises(Exception, c.add_gate, paulix, 1)
+        self.assertRaises(Exception, c.add_gate, paulix, 0)
 
     def test_add_gate_posn_constraint(self):
         """Adding a gate to invalid position, fails"""
