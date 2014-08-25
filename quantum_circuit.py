@@ -8,7 +8,6 @@ class QuantumCircuit:
         self.num_steps = num_steps
         self.num_qubits = num_qubits
         self.num_bases = pow(2, num_qubits)
-        self.zeros = np.zeros((self.num_bases, self.num_bases), dtype=np.complex_)
 
         self.grid = [
             [
