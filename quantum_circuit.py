@@ -1,7 +1,6 @@
 import numpy as np
 from pprint import pprint
 
-# TODO having a conceptual circuit and quantum circuit is unnecessary - refactor
 class QuantumCircuit:
 
     def __init__(self, num_qubits, num_steps):
