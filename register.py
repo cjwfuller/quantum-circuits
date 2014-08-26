@@ -1,3 +1,32 @@
+import math
+import numpy as np
+
 class Register:
-    def __init__(self, num_qubits):
-        self.state = [complex(0,0)] * pow(2, num_qubits)
+
+    def __init__(self, state):
+        """Initialise quantum register
+
+        state - column vector representing initial quantum state. Example:
+            [
+                (0.0, 0.0i) # 00
+                (0.0, 0.0i) # 01
+                (1.0, 0.0i) # 10
+                (0.0, 0.0i) # 11
+            ]
+
+        A register can be in a measured state superposition of states e.g.
+        if a Hadamard gate is applied to a 1-qubit system then the qubit
+        would be in a superposition of being both 0 and 1
+
+        The state of the register must always follow this equation:
+        Let a, b and c be complex numbers representing the quantum states of a
+        2-qubit system: |a|^2 + |b|^2 + |c|^2 + |d|^2 = 1
+        """
+
+        total = complex(0, 0)
+        for s in state:
+            total = total + pow(np.abs(s), 2)
+        if(round(total) != 1): # FIXME should not have to use round
+            raise Exception("Quantum state is invalid")
+
+        self.state = state
