@@ -1,10 +1,28 @@
+import math
 import unittest
+import numpy as np
 import register
 
 class TestRegister(unittest.TestCase):
-    def test_initialise_size(self):
-        r = register.Register(3)
-        self.assertEqual(len(r.state), 8)
+
+    def test_basic_construction(self):
+        """Constructing a valid register with no superposition, works"""
+        state = np.array([1, 0], dtype=np.complex_)
+        r = register.Register(state)
+
+    # TODO
+    def test_superposition_construction(self):
+        """Constructing a valid register with superposition, works"""
+        state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
+        r = register.Register(state)
+
+    # TODO
+    def test_invalid_size_constraint(self):
+        """Constructing register with invalid size, fails"""
+
+    # TODO
+    def test_invalid_state_constraint(self):
+        """Constructing register with invalid state, fails"""
 
 if __name__ == '__main__':
     unittest.main()
