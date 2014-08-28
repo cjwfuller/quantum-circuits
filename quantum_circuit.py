@@ -1,5 +1,6 @@
 import numpy as np
 from pprint import pprint
+import register
 
 class QuantumCircuit:
 
@@ -8,6 +9,7 @@ class QuantumCircuit:
         self.num_steps = num_steps
         self.num_qubits = num_qubits
         self.num_bases = pow(2, num_qubits)
+        self.register = register.Register(num_qubits)
 
         self.grid = [
             [
