@@ -23,10 +23,11 @@ class Register:
         2-qubit system: |a|^2 + |b|^2 + |c|^2 + |d|^2 = 1
         """
 
+        eps = 0.0001
         total = complex(0, 0)
         for s in state:
             total = total + pow(np.abs(s), 2)
-        if(round(total) != 1): # FIXME should not have to use round
+        if(not (abs(total - (complex(1, 0))) < eps)):
             raise Exception("Quantum state is invalid")
 
         self.state = state
