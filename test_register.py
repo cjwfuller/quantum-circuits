@@ -15,9 +15,10 @@ class TestRegister(unittest.TestCase):
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
         r = register.Register(state)
 
-    # TODO
     def test_invalid_size_constraint(self):
         """Constructing register with invalid size, fails"""
+        state = np.array([1/math.sqrt(2), 1/math.sqrt(2), 0], dtype=np.complex_)
+        self.assertRaises(Exception, register.Register, state)
 
     def test_invalid_state_constraint(self):
         """Constructing register with invalid state, fails"""
