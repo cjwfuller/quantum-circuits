@@ -13,6 +13,7 @@ class Register:
                 (1.0, 0.0i) # 10
                 (0.0, 0.0i) # 11
             ]
+        shows a "collapsed quantum state" because 10 is the only state set to 1
 
         A register can be in a measured state superposition of states e.g.
         if a Hadamard gate is applied to a 1-qubit system then the qubit
