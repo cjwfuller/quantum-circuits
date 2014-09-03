@@ -3,7 +3,7 @@ import numpy as np
 
 class Register:
 
-    def __init__(self, state):
+    def __init__(self, num_qubits, state):
         """Initialise quantum register
 
         state - column vector representing initial quantum state. Example:
@@ -32,3 +32,4 @@ class Register:
             raise Exception("Quantum state is invalid")
 
         self.state = state
+        self.num_qubits = num_qubits
