@@ -101,7 +101,7 @@ class TestQuantumCircuit(unittest.TestCase):
         r = register.Register(1, state)
         c = qc.QuantumCircuit(r, num_steps)
         hadamard = gate.QuantumGate('hadamard')
-        c.add_gate(hadamard, 1)
+        c.add_gate(hadamard, 0)
 
         self.assertRaises(Exception, c.add_gate, hadamard, 1)
 
