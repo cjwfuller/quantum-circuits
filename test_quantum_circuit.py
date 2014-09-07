@@ -129,7 +129,6 @@ class TestQuantumCircuit(unittest.TestCase):
         c = qc.QuantumCircuit(r, num_steps)
         hadamard = gate.QuantumGate('hadamard')
         c.add_gate(hadamard, 0)
-
         c.step_forwards()
 
 if __name__ == '__main__':
