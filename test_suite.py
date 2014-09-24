@@ -1,9 +1,9 @@
 import unittest
 
 testmodules = [
-    'test_gate',
-    'test_register',
-    'test_quantum_circuit'
+    'tests.test_gate',
+    'tests.test_register',
+    'tests.test_quantum_circuit'
 ]
 
 suite = unittest.TestSuite()
