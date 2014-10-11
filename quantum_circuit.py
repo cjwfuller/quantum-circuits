@@ -4,17 +4,15 @@ import register
 
 class QuantumCircuit:
 
-    def __init__(self, num_qubits, num_steps):
+    def __init__(self, register, num_steps):
         self.step = 0
         self.num_steps = num_steps
-        self.num_qubits = num_qubits
-        self.num_bases = pow(2, num_qubits)
-        self.register = register.Register(num_qubits)
+        self.register = register
 
         self.grid = [
             [
-                None for gate in xrange(self.num_bases)
-            ] for n in xrange(self.num_steps)
+                None for gate in xrange(register.num_qubits)
+            ] for n in xrange(num_steps)
         ]
 
     # TODO
