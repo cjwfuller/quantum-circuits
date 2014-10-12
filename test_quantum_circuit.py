@@ -124,12 +124,16 @@ class TestQuantumCircuit(unittest.TestCase):
         """Stepping forwards, applies a gate"""
         num_steps = 3
 
-        state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
-        r = register.Register(1, state)
+        s = np.array([1, 0], dtype=np.complex_)
+        r = register.Register(1, s)
         c = qc.QuantumCircuit(r, num_steps)
         hadamard = gate.QuantumGate('hadamard')
         c.add_gate(hadamard, 0)
         c.step_forwards()
+
+        final_state = np.squeeze(np.asarray(c.register.state))
+        self.assertEqual(final_state[0], 1/math.sqrt(2))
+        self.assertEqual(final_state[1], 1/math.sqrt(2))
 
 if __name__ == '__main__':
     unittest.main()
