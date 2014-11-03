@@ -1,6 +1,6 @@
 import numpy as np
 import gate
-import register
+import register as r
 
 class QuantumGate(gate.Gate):
     """
@@ -51,17 +51,18 @@ class QuantumGate(gate.Gate):
 
         resized_dimension = pow(2, num_qubits)
         resized = np.zeros((resized_dimension, resized_dimension), dtype=np.complex_)
-        filtered_bases = register.Register.filter_bases(num_qubits, qubit_nums)
-        new_bases = register.Register.generate_bases(num_qubits)
+        filtered_bases = r.Register.filter_bases(num_qubits, qubit_nums)
+        new_bases = r.Register.generate_bases(num_qubits)
         for idx, dirac_base in enumerate(filtered_bases):
-            vector = register.Register.dirac_to_column_vector(dirac_base)
+            vector = r.Register.dirac_to_column_vector(dirac_base)
             # apply fundamental matrix to column vector
             vector = np.squeeze(np.asarray(np.dot(self.get_matrix(), vector)))
             # build the new set of bases vectors
-            new_dirac_base = register.Register.column_vector_to_dirac(vector)
+            new_dirac_bases = r.Register.column_vector_to_possible_dirac_vectors(vector)
             for idy, qubit_num in enumerate(qubit_nums):
-                new_bases[idx][qubit_num] = new_dirac_base[idy]
-            row = register.Register.dirac_to_column_vector(new_bases[idx])
+                for new_dirac_base in new_dirac_bases:
+                    new_bases[idx][qubit_num] = new_dirac_base[idy]
+            row = r.Register.dirac_to_column_vector(new_bases[idx])
             # build the resized matrix
             resized[idx] = row
         self.matrix = resized

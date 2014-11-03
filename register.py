@@ -104,23 +104,27 @@ class Register(object):
         return vector
 
     @staticmethod
-    def column_vector_to_dirac(column):
-        """Convert vector from to Dirac form to column vector
+    def column_vector_to_possible_dirac_vectors(column):
+        """Convert column vector to all possible Dirac vectors
 
         Arguments:
         column -- column vector to convert e.g. [0, 0, 0, 1]
 
-        Example:
-             [0, 0, 0, 1] returns [0, 0] (|00> in Dirac notation)
+        Examples:
+             [0, 0, 0, 1] returns [0, 0]
+             (or |00> in Dirac notation)
+
+             [0, 0, 1/sqrt(2), 1/sqrt(2)] returns [0, 0] or [0, 1]
+             (or |00> or |01> in Dirac notation)
         """
+        possibilities = []
         len_column = len(column)
         num_qubits = int(math.sqrt(len_column))
         bases = Register.generate_bases(num_qubits)
-        try:
-            one_position = tuple(column).index(1)
-        except:
-            raise Exception("Supplied column vector contained no '1' value")
-        return bases[len_column - one_position - 1]
+        for idx, number in enumerate(column):
+            if number != 0:
+                possibilities.append(bases[len_column - idx - 1])
+        return possibilities
 
     # TODO
     def measure(self):
