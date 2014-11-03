@@ -89,21 +89,37 @@ class TestRegister(unittest.TestCase):
 
     def test_smallest_column_to_dirac_conversion(self):
         """Converting from [0, 0, 0, 0] to |00>, works"""
-        actual_converted = r.Register.column_vector_to_dirac([0, 0, 0, 1])
-        expected_converted = [0, 0]
+        actual_converted = r.Register.column_vector_to_possible_dirac_vectors(
+                [0, 0, 0, 1]
+        )
+        expected_converted = [[0, 0]]
         self.assertEquals(expected_converted, actual_converted)
 
-    def test_basic_column_vector_to_dirac_conversion(self):
+    def test_basic_column_vector_to_possible_dirac_vectors_conversion(self):
         """Converting from [0, 0, 1, 0] to |01>, works"""
-        actual_converted = r.Register.column_vector_to_dirac([0, 0, 1, 0])
-        expected_converted = [0, 1]
+        actual_converted = r.Register.column_vector_to_possible_dirac_vectors(
+                [0, 0, 1, 0]
+        )
+        expected_converted = [[0, 1]]
         self.assertEquals(expected_converted, actual_converted)
 
     def test_largest_column_to_dirac_conversion(self):
         """Converting from [1, 0, 0, 0] to |11>, works"""
-        actual_converted = r.Register.column_vector_to_dirac([1, 0, 0, 0])
-        expected_converted = [1, 1]
+        actual_converted = r.Register.column_vector_to_possible_dirac_vectors(
+                [1, 0, 0, 0]
+        )
+        expected_converted = [[1, 1]]
         self.assertEquals(expected_converted, actual_converted)
+
+    def test_more_than_one_possible_dirac_conversion(self):
+        """Converting from a column vector with more than one possible Dirac
+        vector, works"""
+        actual_converted = r.Register.column_vector_to_possible_dirac_vectors(
+                [1/math.sqrt(2), 0, 0, 1/math.sqrt(2)]
+        )
+        expected_converted = [[0, 0], [1, 1]]
+        for expected in expected_converted:
+            self.assertTrue(expected in actual_converted)
 
 if __name__ == '__main__':
     unittest.main()
