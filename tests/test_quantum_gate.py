@@ -12,7 +12,7 @@ class TestQuantumGate(unittest.TestCase):
         """Re-sizing a gate by making it act on more qubits, works"""
         gate = cnot.CNOTQuantumGate()
         gate.resize(3, [0, 2])
-        shape = np.shape(gate.matrix)
+        shape = np.shape(gate.get_matrix())
         size = shape[0]
         self.assertEquals(8, size)
         self.assertEquals(np.matrix("""
@@ -24,13 +24,13 @@ class TestQuantumGate(unittest.TestCase):
                0 0 0 0 1 0 0 0;
                0 0 0 0 0 0 0 1;
                0 0 0 0 0 0 1 0
-            """, np.complex_).all(), gate.matrix.all())
+            """, np.complex_).all(), gate.get_matrix().all())
 
     def test_resize_different_qubit_order(self):
         """Re-sizing and specifying qubits not in order, works"""
         gate = cnot.CNOTQuantumGate()
         gate.resize(3, [2, 0])
-        shape = np.shape(gate.matrix)
+        shape = np.shape(gate.get_matrix())
         size = shape[0]
         self.assertEquals(8, size)
         self.assertEquals(np.matrix("""
@@ -42,7 +42,7 @@ class TestQuantumGate(unittest.TestCase):
                0 0 0 0 1 0 0 0;
                0 0 0 0 0 0 0 1;
                0 0 0 0 0 0 1 0
-            """, np.complex_).all(), gate.matrix.all())
+            """, np.complex_).all(), gate.get_matrix().all())
 
     def test_resize_too_few_qubit_nums_constraint(self):
         """Re-sizing and specifying too few qubits, fails
@@ -74,7 +74,7 @@ class TestQuantumGate(unittest.TestCase):
         gate"""
         gate = cnot.CNOTQuantumGate()
         gate.resize(2, [0, 1])
-        shape = np.shape(gate.matrix)
+        shape = np.shape(gate.get_matrix())
         size = shape[0]
         self.assertEquals(4, size)
         self.assertEquals(np.matrix("""
@@ -82,7 +82,7 @@ class TestQuantumGate(unittest.TestCase):
             0 1 0 0;
             0 0 0 1;
             0 0 1 0
-        """, np.complex_).all(), gate.matrix.all())
+        """, np.complex_).all(), gate.get_matrix().all())
 
 if __name__ == '__main__':
     unittest.main()
