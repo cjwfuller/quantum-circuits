@@ -38,7 +38,6 @@ class Register(object):
         self.state = state
         self.num_qubits = num_qubits
 
-    # TODO make me private but still somehow testable
     @staticmethod
     def generate_bases(num_qubits):
         """Generate bases vectors
