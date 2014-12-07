@@ -59,6 +59,21 @@ class Register:
             bases.append(base)
         return bases
 
+    def filter_bases(self, num_qubits, qubit_nums):
+        """Filter bases
+
+        Example:
+            - Generate bases: [000, 001, 010, 011, 100, 101, 110, 111]
+            - Filter to qubits 0 and 2: [00, 01, 00, 01, 10, 11, 10, 11]
+        """
+        bases = self.generate_bases(num_qubits)
+        for base_num, base in enumerate(bases):
+            bases_before_filter = bases[base_num]
+            bases[base_num] = []
+            for qubit_position in qubit_nums:
+                bases[base_num].append(bases_before_filter[qubit_position])
+        return bases
+
     def measure(self):
         """Perform quantum measurement
 
