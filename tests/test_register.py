@@ -48,5 +48,32 @@ class TestRegister(unittest.TestCase):
         generated_bases = r.generate_bases(1)
         self.assertEquals(expected_bases, generated_bases)
 
+    def test_basic_filter(self):
+        """Filtering a 3-qubit to qubits 1 and 3, works"""
+        # FIXME remove construction when method is made static
+        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
+        r = register.Register(3, state)
+        expected_filtered = [[0, 0], [0, 1], [0, 0], [0, 1], [1, 0], [1, 1],
+                [1, 0], [1, 1]]
+        actual_filtered = r.filter_bases(3, [0, 3])
+        self.assertEquals(expected_filtered, actual_filtered)
+
+    def test_filter_whole_system(self):
+        """Filtering all qubits, works"""
+        # FIXME remove construction when method is made static
+        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
+        r = register.Register(3, state)
+        expected_filtered = [[0, 0, 0], [0, 0, 1],[0, 1, 0], [0, 1, 1],
+                [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+        actual_filtered = r.filter_bases(3, [0, 1, 2])
+        self.assertEquals(expected_filtered, actual_filtered)
+
+    def test_filter_non_existant_qubit(self):
+        """Filtering a with a qubit that doesn't exist, fails"""
+        # FIXME remove construction when method is made static
+        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
+        r = register.Register(3, state)
+        self.assertRaises(Exception, r.filter_bases, 3, [0, 3])
+
 if __name__ == '__main__':
     unittest.main()
