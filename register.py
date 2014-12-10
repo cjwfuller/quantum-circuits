@@ -47,17 +47,16 @@ class Register:
         Example: [000, 001, 010, 011, 100, 101, 110, 111] for a 3-qubit system
         """
         bases = []
-        base_idx = pow(2, num_qubits) - 1
-        while base_idx >= 0:
+        num_vectors = pow(2, num_qubits)
+        base_idx = 0
+        for idx in xrange(num_vectors):
             base = []
-            current_base = base_idx
+            current_base = idx
             for c in xrange(num_qubits):
                 base.append(current_base % 2)
                 current_base = current_base / 2
             base.reverse()
             bases.append(base)
-            base_idx = base_idx - 1
-        bases.reverse()
         return bases
 
     def measure(self):
