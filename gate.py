@@ -40,6 +40,7 @@ class QuantumGate:
             raise Exception("Supplied matrix is not unitary")
 
     def __is_unitary(self):
+        """Determine whether the gate is unitary"""
         shape = np.shape(self.matrix)
         # unitary matrices will always have dimension n*n
         x, y = shape[0], shape[1]
@@ -49,3 +50,11 @@ class QuantumGate:
         identity = np.identity(x)
         conjugate_transpose = self.matrix.getH()
         return (self.matrix * conjugate_transpose).all() == identity.all()
+
+    def resize(self, num_qubits):
+        """Resize a gate to act on a given number of qubits.
+
+        Gates can act on an arbitrary number of qubits but they must be
+        resized so they can be applied to the circuit
+        """
+

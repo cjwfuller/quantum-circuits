@@ -135,5 +135,18 @@ class TestQuantumCircuit(unittest.TestCase):
         self.assertEqual(final_state[0], 1/math.sqrt(2))
         self.assertEqual(final_state[1], 1/math.sqrt(2))
 
+    # TODO
+    def test_basic_measure(self):
+        """Measuring, collapses quantum state"""
+        num_steps = 3
+
+        s = np.array([1, 0], dtype=np.complex_)
+        r = register.Register(1, s)
+        c = qc.QuantumCircuit(r, num_steps)
+        hadamard = gate.QuantumGate('hadamard')
+        c.add_gate(hadamard, 0)
+        c.step_forwards()
+        c.register.measure()
+
 if __name__ == '__main__':
     unittest.main()

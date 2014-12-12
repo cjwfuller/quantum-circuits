@@ -37,3 +37,17 @@ class Register:
 
         self.state = state
         self.num_qubits = num_qubits
+
+    # TODO
+    def measure(self):
+        """Perform quantum measurement
+
+        Collapses from quantum state to classical state
+        qubit_num -- the qubits to measure
+        """
+        # TODO use a {}?
+        # TODO to do this, loop through each bases and do (1/value)^2
+        current_state = np.squeeze(np.asarray(self.state))
+        probabilities = {}
+        for idx, basis in enumerate(current_state):
+            probabilities[idx] = pow(basis, 2)

@@ -15,14 +15,6 @@ class QuantumCircuit:
             ] for n in xrange(num_steps)
         ]
 
-    # TODO
-    def __resize_gate(self, gate):
-        """Resize a gate to be the same size as the number of basis vectors.
-
-        gates can act on an arbitrary number of qubits but they must be
-        resized so they can be applied to the circuit
-        """
-
     def add_gate(self, gate, qubit_num):
         """Add a gate to the circuit.
 
@@ -39,19 +31,11 @@ class QuantumCircuit:
                 break
             step = step + 1
 
-    # TODO
     def step_forwards(self):
         """Apply gates in next step to register"""
         if self.step == self.num_steps:
             raise IndexError("No free steps to step forwards")
+        for gate in self.grid[self.step]:
+            if(gate is not None):
+               self.register.state = np.dot(self.register.state, gate.matrix)
         self.step = self.step + 1
-
-        for idx, basis in enumerate(self.grid[self]):
-            print basis
-
-   # TODO
-   def measure(self):
-        """Perform quantum measurement
-
-        Collapses from quantum state to classical state
-        """
