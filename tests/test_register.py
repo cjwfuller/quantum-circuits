@@ -25,5 +25,28 @@ class TestRegister(unittest.TestCase):
         state = np.array([1, 1, 1, 1], dtype=np.complex_)
         self.assertRaises(Exception, register.Register, state, 2)
 
+    def test_basic_generate_bases(self):
+        """Generating bases for a 3-qubit system results in the correct
+        bases
+        """
+        # FIXME remove construction when method is made static
+        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
+        r = register.Register(3, state)
+        expected_bases = [[0, 0, 0], [0, 0, 1],[0, 1, 0], [0, 1, 1],
+                [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+        generated_bases = r.generate_bases(3)
+        self.assertEquals(expected_bases, generated_bases)
+
+    def test_generate_single_qubit_bases(self):
+        """Generating bases for a 1-qubit system results in the correct
+        bases
+        """
+        # FIXME remove construction when method is made static
+        state = np.array([1, 0], dtype=np.complex_)
+        r = register.Register(1, state)
+        expected_bases = [[0], [1]]
+        generated_bases = r.generate_bases(1)
+        self.assertEquals(expected_bases, generated_bases)
+
 if __name__ == '__main__':
     unittest.main()
