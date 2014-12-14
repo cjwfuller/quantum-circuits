@@ -43,5 +43,9 @@ class TestGate(unittest.TestCase):
         hadamard = gate.QuantumGate('hadamard')
         self.assertEquals('H', hadamard.symbol)
 
+    def test_resize_num_qubits_qubit_nums_constraint(self):
+        hadamard = gate.QuantumGate('hadamard')
+        self.assertRaises(Exception, hadamard.resize, 2, [0, 1, 2])
+
 if __name__ == '__main__':
     unittest.main()
