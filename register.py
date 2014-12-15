@@ -49,10 +49,10 @@ class Register:
         bases = []
         num_vectors = pow(2, num_qubits)
         base_idx = 0
-        for idx in xrange(num_vectors):
+        for idx in range(num_vectors):
             base = []
             current_base = idx
-            for idy in xrange(num_qubits):
+            for idy in range(num_qubits):
                 base.append(current_base % 2)
                 current_base = current_base / 2
             base.reverse()

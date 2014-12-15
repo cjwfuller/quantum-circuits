@@ -1,6 +1,6 @@
 import numpy as np
 from pprint import pprint
-import register
+from . import register
 
 class QuantumCircuit:
 
@@ -11,8 +11,8 @@ class QuantumCircuit:
 
         self.grid = [
             [
-                None for gate in xrange(register.num_qubits)
-            ] for n in xrange(num_steps)
+                None for gate in range(register.num_qubits)
+            ] for n in range(num_steps)
         ]
 
     def add_gate(self, gate, qubit_num):
