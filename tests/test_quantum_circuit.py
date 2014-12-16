@@ -2,7 +2,7 @@ import unittest
 import math
 import numpy as np
 import quantum_circuit as qc
-import gate
+import paulix, pauliy, hadamard
 import register
 
 class TestQuantumCircuit(unittest.TestCase):
@@ -40,10 +40,10 @@ class TestQuantumCircuit(unittest.TestCase):
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
         r = register.Register(1, state)
         c = qc.QuantumCircuit(r, num_steps)
-        paulix = gate.QuantumGate('paulix')
-        c.add_gate(paulix, qubit_num)
+        gate = paulix.PauliXQuantumGate()
+        c.add_gate(gate, qubit_num)
 
-        self.assertEqual(c.grid[step][qubit_num].symbol, paulix.symbol)
+        self.assertEqual(c.grid[step][qubit_num].symbol, gate.get_symbol())
 
     def test_two_gates_same_qubit(self):
         """Adding two quantum gates to the same first qubit, works
@@ -58,13 +58,15 @@ class TestQuantumCircuit(unittest.TestCase):
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
         r = register.Register(1, state)
         c = qc.QuantumCircuit(r, num_steps)
-        paulix = gate.QuantumGate('paulix')
-        pauliy = gate.QuantumGate('pauliy')
-        c.add_gate(paulix, qubit_num)
-        c.add_gate(pauliy, qubit_num)
+        paulix_gate = paulix.PauliXQuantumGate()
+        pauliy_gate = pauliy.PauliYQuantumGate()
+        c.add_gate(paulix_gate, qubit_num)
+        c.add_gate(pauliy_gate, qubit_num)
 
-        self.assertEqual(c.grid[paulix_step][qubit_num].symbol, paulix.symbol)
-        self.assertEqual(c.grid[pauliy_step][qubit_num].symbol, pauliy.symbol)
+        self.assertEqual(c.grid[paulix_step][qubit_num].symbol,
+                paulix_gate.get_symbol())
+        self.assertEqual(c.grid[pauliy_step][qubit_num].symbol,
+                pauliy_gate.get_symbol())
 
     def test_add_after_last_step_constraint(self):
         """Adding a gate after last position, fails"""
@@ -74,10 +76,10 @@ class TestQuantumCircuit(unittest.TestCase):
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
         r = register.Register(1, state)
         c = qc.QuantumCircuit(r, num_steps)
-        paulix = gate.QuantumGate('paulix')
-        c.add_gate(paulix, qubit_num)
+        gate = paulix.PauliXQuantumGate()
+        c.add_gate(gate, qubit_num)
 
-        self.assertRaises(Exception, c.add_gate, paulix, qubit_num)
+        self.assertRaises(Exception, c.add_gate, gate, qubit_num)
 
     def test_add_gate_posn_constraint(self):
         """Adding a gate to invalid position, fails"""
@@ -86,9 +88,9 @@ class TestQuantumCircuit(unittest.TestCase):
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
         r = register.Register(1, state)
         c = qc.QuantumCircuit(r, num_steps)
-        paulix = gate.QuantumGate('paulix')
+        gate = paulix.PauliXQuantumGate()
 
-        self.assertRaises(Exception, c.add_gate, paulix, 2)
+        self.assertRaises(Exception, c.add_gate, gate, 2)
 
     def test_add_gate_too_large_constraint(self):
         """Adding a gate too big for circuit, fails
@@ -100,10 +102,10 @@ class TestQuantumCircuit(unittest.TestCase):
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
         r = register.Register(1, state)
         c = qc.QuantumCircuit(r, num_steps)
-        hadamard = gate.QuantumGate('hadamard')
-        c.add_gate(hadamard, 0)
+        gate = hadamard.HadamardQuantumGate()
+        c.add_gate(gate, 0)
 
-        self.assertRaises(Exception, c.add_gate, hadamard, 1)
+        self.assertRaises(Exception, c.add_gate, gate, 1)
 
     def test_maintain_step(self):
         """Stepping forwards, maintains the circuit position
@@ -143,8 +145,8 @@ class TestQuantumCircuit(unittest.TestCase):
         s = np.array([1, 0], dtype=np.complex_)
         r = register.Register(1, s)
         c = qc.QuantumCircuit(r, num_steps)
-        hadamard = gate.QuantumGate('hadamard')
-        c.add_gate(hadamard, 0)
+        gate = hadamard.HadamardQuantumGate()
+        c.add_gate(gate, 0)
         c.step_forwards()
         c.register.measure()
 
