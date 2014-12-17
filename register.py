@@ -24,6 +24,17 @@ class Register:
         2-qubit system: |a|^2 + |b|^2 + |c|^2 + |d|^2 = 1
         """
 
+        Arguments:
+        num_qubits -- number of qubits in register e.g. 3
+        state -- column vector representing initial quantum state. Example:
+            [
+                (0.0, 0.0i) # 0 0
+                (0.0, 0.0i) # 0 1
+                (1.0, 0.0i) # 1 0
+                (0.0, 0.0i) # 1 1
+            ]
+        shows a "collapsed quantum state" because 1 0 is the only state set to 1
+        """
         num_bases = len(state)
         if(num_bases != pow(2, num_qubits)):
             raise Exception("Invalid number of bases vectors")
@@ -44,6 +55,9 @@ class Register:
     def generate_bases(self, num_qubits):
         """ Generate bases vectors
 
+        Arguments:
+        num_qubits -- number of qubits in register e.g. 3
+
         Example: [000, 001, 010, 011, 100, 101, 110, 111] for a 3-qubit system
         """
         bases = []
@@ -61,6 +75,10 @@ class Register:
 
     def filter_bases(self, num_qubits, qubit_nums):
         """Filter bases
+
+        Arguments:
+        num_qubits -- number of qubits in register e.g. 3
+        qubit_nums -- the qubits to filter e.g. 0 and 2
 
         Example:
             - Generate bases: [000, 001, 010, 011, 100, 101, 110, 111]

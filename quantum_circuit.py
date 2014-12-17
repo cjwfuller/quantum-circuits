@@ -5,6 +5,12 @@ import register
 class QuantumCircuit:
 
     def __init__(self, register, num_steps):
+        """
+        Arguments:
+        register -- the register the circuit acts on
+        num_steps -- number of steps through circuit e.g. 5 steps would allow
+            5 gates per qubit
+        """
         self.step = 0
         self.num_steps = num_steps
         self.register = register
