@@ -4,7 +4,6 @@ import numpy as np
 import register
 
 class TestRegister(unittest.TestCase):
-
     def test_basic_construction(self):
         """Constructing a valid register with no superposition, works"""
         state = np.array([1, 0], dtype=np.complex_)

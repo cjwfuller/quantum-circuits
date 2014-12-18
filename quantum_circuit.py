@@ -3,7 +3,6 @@ from pprint import pprint
 import register
 
 class QuantumCircuit:
-
     def __init__(self, register, num_steps):
         """
         Arguments:
