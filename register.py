@@ -49,11 +49,10 @@ class Register:
         self.state = state
         self.num_qubits = num_qubits
 
-    # TODO
-    # TODO make me static
     # TODO make me private but still somehow testable
-    def generate_bases(self, num_qubits):
-        """ Generate bases vectors
+    @staticmethod
+    def generate_bases(num_qubits):
+        """Generate bases vectors
 
         Arguments:
         num_qubits -- number of qubits in register e.g. 3
@@ -73,7 +72,8 @@ class Register:
             bases.append(base)
         return bases
 
-    def filter_bases(self, num_qubits, qubit_nums):
+    @staticmethod
+    def filter_bases(num_qubits, qubit_nums):
         """Filter bases
 
         Arguments:
@@ -84,13 +84,32 @@ class Register:
             - Generate bases: [000, 001, 010, 011, 100, 101, 110, 111]
             - Filter to qubits 0 and 2: [00, 01, 00, 01, 10, 11, 10, 11]
         """
-        bases = self.generate_bases(num_qubits)
+        bases = Register.generate_bases(num_qubits)
         for base_num, base in enumerate(bases):
             bases_before_filter = bases[base_num]
             bases[base_num] = []
             for qubit_position in qubit_nums:
                 bases[base_num].append(bases_before_filter[qubit_position])
         return bases
+
+    @staticmethod
+    def dirac_to_column_vector(dirac):
+        """Convert Dirac vectors from to column vector form
+
+        Arguments:
+        dirac -- dirac vector to convert e.g. [0, 0]
+
+        Example:
+            [0, 0] (|00> in Dirac notation) returns [0, 0, 0, 1]
+        """
+        binary_str = ''
+        for d in dirac:
+            binary_str = binary_str + str(d)
+        num_qubits = pow(len(dirac), 2)
+        one_position = num_qubits - int(binary_str, 2) - 1
+        vector = [0] * num_qubits
+        vector[one_position] = 1
+        return vector
 
     def measure(self):
         """Perform quantum measurement
