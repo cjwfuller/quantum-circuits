@@ -33,7 +33,7 @@ class Register:
                 (1.0, 0.0i) # 1 0
                 (0.0, 0.0i) # 1 1
             ]
-        shows a "collapsed quantum state" because 1 0 is the only state set to 1
+        shows a 'collapsed quantum state' because 1 0 is the only state set to 1
         """
         num_bases = len(state)
         if(num_bases != pow(2, num_qubits)):
