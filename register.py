@@ -2,18 +2,8 @@ import math
 import numpy as np
 
 class Register:
-
     def __init__(self, num_qubits, state):
         """Initialise quantum register
-
-        state - column vector representing initial quantum state. Example:
-            [
-                (0.0, 0.0i) # 0 0
-                (0.0, 0.0i) # 0 1
-                (1.0, 0.0i) # 1 0
-                (0.0, 0.0i) # 1 1
-            ]
-        shows a "collapsed quantum state" because 1 0 is the only state set to 1
 
         A register can be in a measured state superposition of states e.g.
         if a Hadamard gate is applied to a 1-qubit system then the qubit
@@ -22,7 +12,6 @@ class Register:
         The state of the register must always follow this equation:
         Let a, b and c be complex numbers representing the quantum states of a
         2-qubit system: |a|^2 + |b|^2 + |c|^2 + |d|^2 = 1
-        """
 
         Arguments:
         num_qubits -- number of qubits in register e.g. 3
@@ -57,7 +46,8 @@ class Register:
         Arguments:
         num_qubits -- number of qubits in register e.g. 3
 
-        Example: [000, 001, 010, 011, 100, 101, 110, 111] for a 3-qubit system
+        Example: [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0,
+        1], [1, 1, 0], [1, 1, 1]] for a 3-qubit system
         """
         bases = []
         num_vectors = pow(2, num_qubits)
@@ -81,8 +71,10 @@ class Register:
         qubit_nums -- the qubits to filter e.g. 0 and 2
 
         Example:
-            - Generate bases: [000, 001, 010, 011, 100, 101, 110, 111]
-            - Filter to qubits 0 and 2: [00, 01, 00, 01, 10, 11, 10, 11]
+            - Generate bases: [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1,
+            0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+            - Filter to qubits 0 and 2: [[0, 0], [0, 1], [0, 0], [0, 1], [1,
+              0], [1, 1], [1, 0], [1, 1]]
         """
         bases = Register.generate_bases(num_qubits)
         for base_num, base in enumerate(bases):
@@ -111,11 +103,11 @@ class Register:
         vector[one_position] = 1
         return vector
 
+    # TODO
     def measure(self):
         """Perform quantum measurement
 
         Collapses from quantum state to classical state
-        qubit_num -- the qubits to measure
         """
         # TODO use a {}?
         # TODO to do this, loop through each bases and do (1/value)^2
