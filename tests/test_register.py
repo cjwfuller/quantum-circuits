@@ -28,51 +28,54 @@ class TestRegister(unittest.TestCase):
         """Generating bases for a 3-qubit system results in the correct
         bases
         """
-        # FIXME remove construction when method is made static
-        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
-        r = register.Register(3, state)
         expected_bases = [[0, 0, 0], [0, 0, 1],[0, 1, 0], [0, 1, 1],
                 [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
-        generated_bases = r.generate_bases(3)
+        generated_bases = register.Register.generate_bases(3)
         self.assertEquals(expected_bases, generated_bases)
 
     def test_generate_single_qubit_bases(self):
         """Generating bases for a 1-qubit system results in the correct
         bases
         """
-        # FIXME remove construction when method is made static
-        state = np.array([1, 0], dtype=np.complex_)
-        r = register.Register(1, state)
         expected_bases = [[0], [1]]
-        generated_bases = r.generate_bases(1)
+        generated_bases = register.Register.generate_bases(1)
         self.assertEquals(expected_bases, generated_bases)
 
     def test_basic_filter(self):
-        """Filtering a 3-qubit to qubits 1 and 3, works"""
-        # FIXME remove construction when method is made static
-        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
-        r = register.Register(3, state)
+        """Filtering a 3-qubit to qubits 0 and 2, works"""
         expected_filtered = [[0, 0], [0, 1], [0, 0], [0, 1], [1, 0], [1, 1],
                 [1, 0], [1, 1]]
-        actual_filtered = r.filter_bases(3, [0, 3])
+        actual_filtered = register.Register.filter_bases(3, [0, 2])
         self.assertEquals(expected_filtered, actual_filtered)
 
     def test_filter_whole_system(self):
         """Filtering all qubits, works"""
-        # FIXME remove construction when method is made static
-        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
-        r = register.Register(3, state)
         expected_filtered = [[0, 0, 0], [0, 0, 1],[0, 1, 0], [0, 1, 1],
                 [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
-        actual_filtered = r.filter_bases(3, [0, 1, 2])
+        actual_filtered = register.Register.filter_bases(3, [0, 1, 2])
         self.assertEquals(expected_filtered, actual_filtered)
 
     def test_filter_non_existant_qubit(self):
         """Filtering a with a qubit that doesn't exist, fails"""
-        # FIXME remove construction when method is made static
-        state = np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=np.complex_)
-        r = register.Register(3, state)
-        self.assertRaises(Exception, r.filter_bases, 3, [0, 3])
+        self.assertRaises(Exception, register.Register.filter_bases, 3, [0, 4])
+
+    def test_smallest_dirac_conversion(self):
+        """Converting from |00> to vector form, works"""
+        actual_converted = register.Register.dirac_to_column_vector([0, 0])
+        expected_converted = [0, 0, 0, 1]
+        self.assertEquals(expected_converted, actual_converted)
+
+    def test_basic_dirac_conversion(self):
+        """Converting from |01> to vector form, works"""
+        actual_converted = register.Register.dirac_to_column_vector([0, 1])
+        expected_converted = [0, 0, 1, 0]
+        self.assertEquals(expected_converted, actual_converted)
+
+    def test_largest_dirac_conversion(self):
+        """Converting from |11> to vector form, works"""
+        actual_converted = register.Register.dirac_to_column_vector([1, 1])
+        expected_converted = [1, 0, 0, 0]
+        self.assertEquals(expected_converted, actual_converted)
 
 if __name__ == '__main__':
     unittest.main()
