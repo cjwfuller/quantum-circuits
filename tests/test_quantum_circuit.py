@@ -130,8 +130,8 @@ class TestQuantumCircuit(unittest.TestCase):
         s = np.array([1, 0], dtype=np.complex_)
         r = register.Register(1, s)
         c = qc.QuantumCircuit(r, num_steps)
-        hadamard = gate.QuantumGate('hadamard')
-        c.add_gate(hadamard, 0)
+        gate = hadamard.HadamardQuantumGate()
+        c.add_gate(gate, 0)
         c.step_forwards()
 
         final_state = np.squeeze(np.asarray(c.register.state))
