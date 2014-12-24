@@ -42,5 +42,5 @@ class QuantumCircuit:
             raise IndexError("No free steps to step forwards")
         for gate in self.grid[self.step]:
             if(gate is not None):
-               self.register.state = np.dot(self.register.state, gate.matrix)
+                self.register.state = np.dot(self.register.state, gate.matrix)
         self.step = self.step + 1
