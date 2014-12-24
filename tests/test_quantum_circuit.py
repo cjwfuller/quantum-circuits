@@ -2,11 +2,12 @@ import unittest
 import math
 import numpy as np
 import quantum_circuit as qc
-import paulix, pauliy, hadamard
+import gates.paulix as paulix
+import gates.pauliy as pauliy
+import gates.hadamard as hadamard
 import register
 
 class TestQuantumCircuit(unittest.TestCase):
-
     def test_basic_construction(self):
         """Construction should not raise any exceptions"""
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)
