@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
-import cnot
+import gates.cnot as cnot
 
-class TestGate(unittest.TestCase):
+class TestQuantumGate(unittest.TestCase):
     def test_basic_resize(self):
         """Re-sizing a gate by making it act on more qubits, works"""
         gate = cnot.CNOTQuantumGate()
