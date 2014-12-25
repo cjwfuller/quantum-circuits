@@ -34,7 +34,7 @@ class TestQuantumGate(unittest.TestCase):
         """Re-sizing an n-qubit gate to an n-qubit gate does nothing to the
         gate"""
         gate = cnot.CNOTQuantumGate()
-        gate.resize(2, [0, 2])
+        gate.resize(2, [0, 1])
         shape = np.shape(gate.matrix)
         size = shape[0]
         self.assertEquals(4, size)
