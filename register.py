@@ -117,7 +117,7 @@ class Register:
         num_qubits = int(math.sqrt(len_column))
         bases = Register.generate_bases(num_qubits)
         try:
-            one_position = column.index(1)
+            one_position = tuple(column).index(1)
         except:
             raise Exception("Supplied column vector contained no '1' value")
         return bases[len_column - one_position - 1]
