@@ -86,7 +86,7 @@ class Register:
 
     @staticmethod
     def dirac_to_column_vector(dirac):
-        """Convert Dirac vectors from to column vector form
+        """Convert Dirac vector from to column vector form
 
         Arguments:
         dirac -- dirac vector to convert e.g. [0, 0]
