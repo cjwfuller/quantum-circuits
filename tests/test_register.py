@@ -77,5 +77,23 @@ class TestRegister(unittest.TestCase):
         expected_converted = [1, 0, 0, 0]
         self.assertEquals(expected_converted, actual_converted)
 
+    def test_smallest_column_to_dirac_conversion(self):
+        """Converting from [0, 0, 0, 0] to |00>, works"""
+        actual_converted = r.Register.column_vector_to_dirac([0, 0, 0, 1])
+        expected_converted = [0, 0]
+        self.assertEquals(expected_converted, actual_converted)
+
+    def test_basic_column_vector_to_dirac_conversion(self):
+        """Converting from [0, 0, 1, 0] to |01>, works"""
+        actual_converted = r.Register.column_vector_to_dirac([0, 0, 1, 0])
+        expected_converted = [0, 1]
+        self.assertEquals(expected_converted, actual_converted)
+
+    def test_largest_column_to_dirac_conversion(self):
+        """Converting from [1, 0, 0, 0] to |11>, works"""
+        actual_converted = r.Register.dirac_to_column_vector([1, 0, 0, 0])
+        expected_converted = [1, 1]
+        self.assertEquals(expected_converted, actual_converted)
+
 if __name__ == '__main__':
     unittest.main()
