@@ -91,7 +91,7 @@ class TestRegister(unittest.TestCase):
 
     def test_largest_column_to_dirac_conversion(self):
         """Converting from [1, 0, 0, 0] to |11>, works"""
-        actual_converted = r.Register.dirac_to_column_vector([1, 0, 0, 0])
+        actual_converted = r.Register.column_vector_to_dirac([1, 0, 0, 0])
         expected_converted = [1, 1]
         self.assertEquals(expected_converted, actual_converted)
 
