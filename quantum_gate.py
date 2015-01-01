@@ -5,6 +5,10 @@ import register
 class QuantumGate(gate.Gate):
     def get_symbol(self):
         return self.symbol
+    """
+    super(<name of child class>, self) should be called before any methods in
+    QuantumGate are called
+    """
 
     def get_matrix(self):
         return self.matrix
