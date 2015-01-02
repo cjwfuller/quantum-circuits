@@ -3,27 +3,31 @@ import gate
 import register
 
 class QuantumGate(gate.Gate):
-    def get_symbol(self):
-        return self.symbol
     """
     super(<name of child class>, self) should be called before any methods in
     QuantumGate are called
     """
 
-    def get_matrix(self):
-        return self.matrix
+    def __init__(self):
+        """Determine whether the gate is quantum
 
-    def __is_unitary(self):
-        """Determine whether the gate is unitary"""
+        This is done by determining whether the gate has a unitary matrix"""
         shape = np.shape(self.matrix)
         # unitary matrices will always have dimension n*n
         x, y = shape[0], shape[1]
         if(x != y):
-            return False
+            raise Exception("Matrix must have dimension n*n")
         # unitary matrices must satisfy U*U = UU* = I
         identity = np.identity(x)
         conjugate_transpose = self.matrix.getH()
-        return (self.matrix * conjugate_transpose).all() == identity.all()
+        if not (self.matrix * conjugate_transpose).all() == identity.all():
+            raise Exception("Matrix must be unitary")
+
+    def get_symbol(self):
+        return self.symbol
+
+    def get_matrix(self):
+        return self.matrix
 
     # TODO
     # TODO qubit_nums need to be the same as the gate size
