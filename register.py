@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-class Register:
+class Register(object):
     def __init__(self, num_qubits, state):
         """Initialise quantum register
 

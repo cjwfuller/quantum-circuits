@@ -2,7 +2,7 @@ import numpy as np
 from pprint import pprint
 import register
 
-class QuantumCircuit:
+class QuantumCircuit(object):
     def __init__(self, register, num_steps):
         """
         Arguments:
