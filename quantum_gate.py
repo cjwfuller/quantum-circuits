@@ -7,6 +7,10 @@ class QuantumGate(gate.Gate):
     super(<name of child class>, self) should be called before any methods in
     QuantumGate are called
     """
+    def __new__(cls, *args, **kwargs):
+        if cls is QuantumGate:
+            raise TypeError("quantum gate class may not be instantiated")
+        return object.__new__(cls, *args, **kwargs)
 
     def __init__(self):
         """Determine whether the gate is quantum
