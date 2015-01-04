@@ -26,6 +26,24 @@ class TestQuantumGate(unittest.TestCase):
                0 0 0 0 0 0 1 0
             """, np.complex_).all(), gate.matrix.all())
 
+    def test_resize_different_qubit_order(self):
+        """Re-sizing and specifying qubits not in order, works"""
+        gate = cnot.CNOTQuantumGate()
+        gate.resize(3, [2, 0])
+        shape = np.shape(gate.matrix)
+        size = shape[0]
+        self.assertEquals(8, size)
+        self.assertEquals(np.matrix("""
+               1 0 0 0 0 0 0 0;
+               0 1 0 0 0 0 0 0;
+               0 0 1 0 0 0 0 0;
+               0 0 0 1 0 0 0 0;
+               0 0 0 0 0 1 0 0;
+               0 0 0 0 1 0 0 0;
+               0 0 0 0 0 0 0 1;
+               0 0 0 0 0 0 1 0
+            """, np.complex_).all(), gate.matrix.all())
+
     def test_resize_too_few_qubit_nums_constraint(self):
         """Re-sizing and specifying too few qubits, fails
 
