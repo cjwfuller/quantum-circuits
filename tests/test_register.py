@@ -59,23 +59,33 @@ class TestRegister(unittest.TestCase):
         """Filtering a with a qubit that doesn't exist, fails"""
         self.assertRaises(Exception, r.Register.filter_bases, 3, [0, 4])
 
-    def test_smallest_dirac_to_column_conversion(self):
-        """Converting from |00> to vector form, works"""
-        actual_converted = r.Register.dirac_to_column_vector([0, 0])
-        expected_converted = [0, 0, 0, 1]
-        self.assertEquals(expected_converted, actual_converted)
+    def test_two_qubit_dirac_to_column_conversion(self):
+        """Converting 2-qubit Dirac vectors to column vectors, works"""
+        vectors = {
+                (0, 0): [0, 0, 0, 1],
+                (0, 1): [0, 0, 1, 0],
+                (1, 0): [0, 1, 0, 0],
+                (1, 1): [1, 0, 0, 0],
+        }
+        for key, value in vectors.iteritems():
+            actual_converted = r.Register.dirac_to_column_vector(key)
+            self.assertEquals(value, actual_converted)
 
-    def test_basic_dirac_to_column_conversion(self):
-        """Converting from |01> to vector form, works"""
-        actual_converted = r.Register.dirac_to_column_vector([0, 1])
-        expected_converted = [0, 0, 1, 0]
-        self.assertEquals(expected_converted, actual_converted)
-
-    def test_largest_dirac_to_column_conversion(self):
-        """Converting from |11> to vector form, works"""
-        actual_converted = r.Register.dirac_to_column_vector([1, 1])
-        expected_converted = [1, 0, 0, 0]
-        self.assertEquals(expected_converted, actual_converted)
+    def test_three_qubit_dirac_to_column_conversion(self):
+        """Converting 3-qubit Dirac vectors to column vectors, works"""
+        vectors = {
+                (0, 0, 0): [0, 0, 0, 0, 0, 0, 0, 1],
+                (0, 0, 1): [0, 0, 0, 0, 0, 0, 1, 0],
+                (0, 1, 0): [0, 0, 0, 0, 0, 1, 0, 0],
+                (1, 0, 0): [0, 0, 0, 0, 1, 0, 0, 0],
+                (1, 0, 1): [0, 0, 0, 1, 0, 0, 0, 0],
+                (0, 1, 1): [0, 0, 1, 0, 0, 0, 0, 0],
+                (1, 1, 0): [0, 1, 0, 0, 0, 0, 0, 0],
+                (1, 1, 1): [1, 0, 0, 0, 0, 0, 0, 0],
+        }
+        for key, value in vectors.iteritems():
+            actual_converted = r.Register.dirac_to_column_vector(key)
+            self.assertEquals(value, actual_converted)
 
     def test_smallest_column_to_dirac_conversion(self):
         """Converting from [0, 0, 0, 0] to |00>, works"""
