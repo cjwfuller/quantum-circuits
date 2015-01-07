@@ -97,9 +97,9 @@ class Register(object):
         binary_str = ''
         for d in dirac:
             binary_str = binary_str + str(d)
-        num_qubits = pow(len(dirac), 2)
-        one_position = num_qubits - int(binary_str, 2) - 1
-        vector = [0] * num_qubits
+        column_vector_len = pow(2, len(dirac))
+        one_position = column_vector_len - int(binary_str, 2) - 1
+        vector = [0] * column_vector_len
         vector[one_position] = 1
         return vector
 
