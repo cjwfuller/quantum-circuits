@@ -45,8 +45,19 @@ class QuantumGate(gate.Gate):
         num_qubits -- number of qubits to resize gate to e.g. 3
         qubit_nums -- qubits to act on e.g. [0, 2]
         """
+        resized_dimension = pow(2, num_qubits)
+        resized = np.zeros((resized_dimension, resized_dimension), dtype=np.complex_)
         filtered_bases = register.Register.filter_bases(num_qubits, qubit_nums)
-        for dirac_base in filtered_bases:
+        new_bases = register.Register.generate_bases(num_qubits)
+        for idx, dirac_base in enumerate(filtered_bases):
             vector = register.Register.dirac_to_column_vector(dirac_base)
-            print vector
-            #print vector * self.get_matrix
+            # apply fundamental matrix to column vector
+            vector = np.squeeze(np.asarray(np.dot(self.get_matrix(), vector)))
+            # build the new set of bases vectors
+            new_dirac_base = register.Register.column_vector_to_dirac(vector)
+            for idy, qubit_num in enumerate(qubit_nums):
+                new_bases[idx][qubit_num] = new_dirac_base[idy]
+            row = register.Register.dirac_to_column_vector(new_bases[idx])
+            # build the resized matrix
+            resized[idx] = row
+        self.matrix = resized
