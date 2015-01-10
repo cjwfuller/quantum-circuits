@@ -26,6 +26,22 @@ class TestQuantumGate(unittest.TestCase):
                0 0 0 0 0 0 1 0
             """, np.complex_).all(), gate.matrix.all())
 
+    def test_resize_too_few_qubit_nums_constraint(self):
+        """Re-sizing and specifying too few qubits, fails
+
+        When re-sizing an n-qubit gate, n qubit numbers should be specified
+        """
+        gate = cnot.CNOTQuantumGate()
+        self.assertRaises(ValueError, gate.resize, 3, [1])
+
+    def test_resize_too_many_qubit_nums_constraint(self):
+        """Re-sizing and specifying too many qubits, fails
+
+        When re-sizing an n-qubit gate, n qubit numbers should be specified
+        """
+        gate = cnot.CNOTQuantumGate()
+        self.assertRaises(ValueError, gate.resize, 3, [0, 1, 2])
+
     def test_non_integer_components_gate_reize(self):
         """Re-sizing a gate with non-integer real/imaginary components,
         works"""
