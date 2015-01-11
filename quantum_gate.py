@@ -33,8 +33,9 @@ class QuantumGate(gate.Gate):
     def get_matrix(self):
         return self.matrix
 
-    # TODO
-    # TODO qubit_nums need to be the same as the gate size
+    def get_num_qubits(self):
+        return self.num_qubits
+
     def resize(self, num_qubits, qubit_nums):
         """Resize a gate to act on a given number of qubits.
 
@@ -45,6 +46,9 @@ class QuantumGate(gate.Gate):
         num_qubits -- number of qubits to resize gate to e.g. 3
         qubit_nums -- qubits to act on e.g. [0, 2]
         """
+        if self.get_num_qubits() != len(qubit_nums):
+            raise ValueError("Invalid number of qubit numbers given")
+
         resized_dimension = pow(2, num_qubits)
         resized = np.zeros((resized_dimension, resized_dimension), dtype=np.complex_)
         filtered_bases = register.Register.filter_bases(num_qubits, qubit_nums)

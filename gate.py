@@ -13,3 +13,7 @@ class Gate(object):
     @abstractmethod
     def get_matrix():
         pass
+
+    @abstractmethod
+    def get_num_qubits():
+        pass
