@@ -18,11 +18,11 @@ class QuantumGate(gate.Gate):
         This is done by determining whether the gate has a unitary matrix"""
         shape = np.shape(self.matrix)
         # unitary matrices will always have dimension n*n
-        x, y = shape[0], shape[1]
-        if(x != y):
+        width, height = shape[0], shape[1]
+        if width != height:
             raise Exception("Matrix must have dimension n*n")
         # unitary matrices must satisfy U*U = UU* = I
-        identity = np.identity(x)
+        identity = np.identity(width)
         conjugate_transpose = self.matrix.getH()
         if not (self.matrix * conjugate_transpose).all() == identity.all():
             raise Exception("Matrix must be unitary")
