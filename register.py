@@ -1,4 +1,6 @@
 import math
+import random
+
 import numpy as np
 
 class Register(object):
@@ -123,6 +125,16 @@ class Register(object):
             if number != 0:
                 possibilities.append(bases[len_column - idx - 1])
         return possibilities
+
+    def __get_collapsed_qubit__(self, probabilities):
+        """Get a random qubit to collapse to based on quantum state"""
+        r = random.uniform(0, 1)
+        s = 0
+        for qubit, prob in enumerate(probabilities):
+            s += probabilities[prob]
+            if s.real >= r.real:
+                return qubit
+        return probabilities[-1]
 
     # TODO
     def measure(self):
