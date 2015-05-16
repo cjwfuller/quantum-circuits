@@ -132,7 +132,7 @@ class Register(object):
         s = 0
         for qubit, prob in enumerate(probabilities):
             s += probabilities[prob]
-            if s.real >= r.real:
+            if s >= r:
                 return qubit
         return probabilities[-1]
 
