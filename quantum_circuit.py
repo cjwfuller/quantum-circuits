@@ -1,5 +1,7 @@
-import numpy as np
 from pprint import pprint
+
+import numpy as np
+
 import register
 
 class QuantumCircuit(object):

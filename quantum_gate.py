@@ -1,4 +1,5 @@
 import numpy as np
+
 import gate
 import register as r
 
