@@ -127,7 +127,11 @@ class Register(object):
         return possibilities
 
     def __get_collapsed_qubit__(self, probabilities):
-        """Get a random qubit to collapse to based on quantum state"""
+        """Get a random qubit to collapse to based on quantum state
+
+        Arguments:
+        probabilities -- probabilities of each state to be the collapse state e.g. [0.5, 0.5]
+        """
         r = random.uniform(0, 1)
         s = 0
         for qubit, prob in enumerate(probabilities):
