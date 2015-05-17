@@ -1,5 +1,7 @@
 import unittest
+
 import numpy as np
+
 import quantum_gate
 import gates.cnot as cnot
 

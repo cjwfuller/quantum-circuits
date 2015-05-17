@@ -1,6 +1,8 @@
 import math
 import unittest
+
 import numpy as np
+
 import register as r
 
 class TestRegister(unittest.TestCase):

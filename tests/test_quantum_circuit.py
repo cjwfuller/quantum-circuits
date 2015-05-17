@@ -1,6 +1,8 @@
 import unittest
 import math
+
 import numpy as np
+
 import quantum_circuit as qc
 import gates.paulix as paulix
 import gates.pauliy as pauliy
