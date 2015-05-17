@@ -8,6 +8,7 @@ class Gate(object):
     Any gate should implement the methods here whether the gate is quantum or
     not
     """
+
     def __new__(cls, *args, **kwargs):
         """Prevent gate class from being instantiated"""
         if cls is Gate:

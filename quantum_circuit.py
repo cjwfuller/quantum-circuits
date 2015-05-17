@@ -5,6 +5,7 @@ import numpy as np
 import register
 
 class QuantumCircuit(object):
+
     def __init__(self, register, num_steps):
         """
         Arguments:

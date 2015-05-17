@@ -10,6 +10,7 @@ import gates.hadamard as hadamard
 import register
 
 class TestQuantumCircuit(unittest.TestCase):
+
     def test_basic_construction(self):
         """Construction should not raise any exceptions"""
         state = np.array([1/math.sqrt(2), 1/math.sqrt(2)], dtype=np.complex_)

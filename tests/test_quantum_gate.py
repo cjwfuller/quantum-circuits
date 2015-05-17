@@ -6,6 +6,7 @@ import quantum_gate
 import gates.cnot as cnot
 
 class TestQuantumGate(unittest.TestCase):
+
     def test_construction_constraint(self):
         """Directly instantiating a QuantumGate, fails"""
         self.assertRaises(TypeError, quantum_gate.QuantumGate)
