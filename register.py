@@ -152,3 +152,8 @@ class Register(object):
         probabilities = {}
         for idx, basis in enumerate(current_state):
             probabilities[idx] = pow(basis, 2)
+        collapsed_qubit = self.__get_collapsed_qubit__(probabilities)
+        for idx, basis in enumerate(current_state):
+            current_state[idx] = 0
+        current_state[collapsed_qubit] = 1
+        self.state = np.asmatrix(current_state)
