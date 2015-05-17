@@ -141,7 +141,6 @@ class TestQuantumCircuit(unittest.TestCase):
         self.assertEqual(final_state[0], 1/math.sqrt(2))
         self.assertEqual(final_state[1], 1/math.sqrt(2))
 
-    # TODO
     def test_basic_measure(self):
         """Measuring, collapses quantum state
 
