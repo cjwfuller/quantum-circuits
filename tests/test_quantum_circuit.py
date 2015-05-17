@@ -140,7 +140,13 @@ class TestQuantumCircuit(unittest.TestCase):
 
     # TODO
     def test_basic_measure(self):
-        """Measuring, collapses quantum state"""
+        """Measuring, collapses quantum state
+
+        Applying a Hadamard gate to a 1-qubit register and measuring, collapses to being [0, 1]
+        or [1, 0] i.e. having (only) one qubit 'off' and one qubit 'on'
+
+        The two collapses can happen with even probability but this isn't tested
+        """
         num_steps = 3
 
         s = np.array([1, 0], dtype=np.complex_)
@@ -150,6 +156,9 @@ class TestQuantumCircuit(unittest.TestCase):
         c.add_gate(gate, 0)
         c.step_forwards()
         c.register.measure()
+
+        current_state = np.squeeze(np.asarray(c.register.state)).real.tolist()
+        self.assertTrue(current_state in [[1, 0], [0 , 1]])
 
 if __name__ == '__main__':
     unittest.main()
