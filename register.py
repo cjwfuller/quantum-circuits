@@ -140,14 +140,11 @@ class Register(object):
                 return qubit
         return probabilities[-1]
 
-    # TODO
     def measure(self):
         """Perform quantum measurement
 
         Collapses from quantum state to classical state
         """
-        # TODO use a {}?
-        # TODO to do this, loop through each bases and do (1/value)^2
         current_state = np.squeeze(np.asarray(self.state))
         probabilities = {}
         for idx, basis in enumerate(current_state):
