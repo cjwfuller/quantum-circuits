@@ -7,7 +7,4 @@ This program is written to learn a bit more about Python so I'll be heavily refa
 
 The project will start off as a command line program but a GUI might be put on top of it using something like Qt later.
 
-Current progress (10th October): All functionality is demonstrated in unit tests only.  Tests show the following:
-- Register initialisation
-- Common quantum gates can be added to a circuit.  Currently, gates can only be added to a register if the gate acts on n qubits and the register has n qubits
-- Stepping forwards through a circuit applies all the gates in the initial step to the register
+Current progress (17th May 2015): All functionality is demonstrated in unit tests only.  It can be shown that a Hadamard gate can be added to a single qubit circuit and when the circuit runs, the Hadamard gate is applied to the qubit.  When a measurement is performed, the qubit will collapse to either a 1 or 0 with probabilities of 0.5.  Current work is ensuring that more qubits and gates can be simulated and that gates can be re-sized.
