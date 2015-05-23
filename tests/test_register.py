@@ -1,6 +1,6 @@
 import math
-import unittest
 
+import unittest2 as unittest
 import numpy as np
 
 import register as r
@@ -70,7 +70,7 @@ class TestRegister(unittest.TestCase):
                 (1, 0): [0, 1, 0, 0],
                 (1, 1): [1, 0, 0, 0],
         }
-        for key, value in vectors.iteritems():
+        for key, value in vectors.items():
             actual_converted = r.Register.dirac_to_column_vector(key)
             self.assertEquals(value, actual_converted)
 
@@ -86,7 +86,7 @@ class TestRegister(unittest.TestCase):
                 (1, 1, 0): [0, 1, 0, 0, 0, 0, 0, 0],
                 (1, 1, 1): [1, 0, 0, 0, 0, 0, 0, 0],
         }
-        for key, value in vectors.iteritems():
+        for key, value in vectors.items():
             actual_converted = r.Register.dirac_to_column_vector(key)
             self.assertEquals(value, actual_converted)
 

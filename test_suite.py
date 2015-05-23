@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import unittest
+import unittest2 as unittest
 
 testmodules = [
     'tests.test_quantum_gate',

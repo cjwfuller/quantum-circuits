@@ -1,4 +1,5 @@
-import unittest
+import numpy as np
+import unittest2 as unittest
 import gate
 
 class TestGate(unittest.TestCase):

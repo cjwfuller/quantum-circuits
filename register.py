@@ -57,7 +57,7 @@ class Register(object):
             base = []
             current_base = idx
             for _ in range(num_qubits):
-                base.append(current_base % 2)
+                base.append(int(current_base % 2))
                 current_base = current_base / 2
             base.reverse()
             bases.append(base)
@@ -78,7 +78,7 @@ class Register(object):
               0], [1, 1], [1, 0], [1, 1]]
         """
         bases = Register.generate_bases(num_qubits)
-        for idx in xrange(len(bases)):
+        for idx in range(len(bases)):
             bases_before_filter = bases[idx]
             bases[idx] = []
             for qubit_position in qubit_nums:
@@ -97,7 +97,7 @@ class Register(object):
         """
         binary_str = ''
         for val in dirac:
-            binary_str = binary_str + str(val)
+            binary_str = binary_str + str(int(val))
         column_vector_len = pow(2, len(dirac))
         one_position = column_vector_len - int(binary_str, 2) - 1
         vector = [0] * column_vector_len
