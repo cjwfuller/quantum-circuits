@@ -11,4 +11,4 @@ Proposed extensions to this project (Pull Requests welcome!):
 - A User Interface (command-line or graphical)
 - Preloaded quantum circuits
 
-The circuit model of quantum computation <i>looks</i> a little like a logic gate circuit but with quantum gates.  However, quantum superposition, measurement and the quantum register make things very different.
+The circuit model of quantum computation <i>looks</i> a little like a logic gate circuit but with quantum gates.  However, quantum superposition, measurement and the quantum register make things very different!
