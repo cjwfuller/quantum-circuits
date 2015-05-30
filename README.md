@@ -1,7 +1,7 @@
 Quantum Circuits
 ================
 
-Simulate quantum circuits on a classical computer.
+Simulate quantum circuits on a classical computer using Python 3 and NumPy.
 
 All functionality is demonstrated in unit tests only.  It can be shown that a Hadamard gate can be added to a single qubit circuit and when the circuit runs, the Hadamard gate is applied to the qubit.  When a measurement is performed, the qubit will collapse to either a 1 or 0 with probabilities of 0.5.
 
